@@ -1,7 +1,4 @@
-import threading
-import time
-
-cake='''
+const cake = `
 .          _..._ .,s$$$s.
          .$$$    for   $$$$
          $$$  the most $$$$
@@ -44,12 +41,6 @@ cake='''
 ⠀⠀⠀⠀⠀⠘⣷⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣾⠃⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠁⠀⠀⠀
 
-Honey jar cuz ure as sweet as honey
-
-'''
-wish=''' 
-
-
  /$$                                                    
 | $$                                                    
 | $$$$$$$   /$$$$$$  /$$$$$$$   /$$$$$$  /$$   /$$      
@@ -61,7 +52,6 @@ wish='''
                                          /$$  | $$      
                                         |  $$$$$$/      
                                          \______/       
-
   
     /$$$$$                    
    |__  $$                    
@@ -73,7 +63,6 @@ wish='''
  \______/  \_______/|__/      
                               
                               
-     
  /$$                                                                  
 | $$                                                                  
 | $$$$$$$   /$$$$$$   /$$$$$$$  /$$$$$$  /$$   /$$  /$$$$$$$  /$$$$$$ 
@@ -83,8 +72,6 @@ wish='''
 | $$$$$$$/|  $$$$$$$|  $$$$$$$|  $$$$$$$|  $$$$$$/ /$$$$$$$/|  $$$$$$$
 |_______/  \_______/ \_______/ \_______/ \______/ |_______/  \_______/
                                                                       
-                                                                      
-          
 
            /$$                                 
           | $/                                 
@@ -94,9 +81,7 @@ wish='''
 | $$  | $$ | $$      | $$_____/       /$$__  $$
 |  $$$$$$/ | $$      |  $$$$$$$      |  $$$$$$$
  \______/  |__/       \_______/       \_______/
-                                               
-                                               
-                                               
+                                                                      
 
   /$$$$$$                                      /$$     /$$          
  /$$__  $$                                    | $$    |__/          
@@ -106,16 +91,29 @@ wish='''
  /$$  \ $$| $$ | $$ | $$| $$_____/| $$_____/  | $$ /$$| $$| $$_____/
 |  $$$$$$/|  $$$$$/$$$$/|  $$$$$$$|  $$$$$$$  |  $$$$/| $$|  $$$$$$$
  \______/  \_____/\___/  \_______/ \_______/   \___/  |__/ \_______/
-                                                                    
-                                                                                                     
-'''
-def task1():
-    for line in cake.strip('\n').split('\n'):
-        print(line)
-        time.sleep(0.3)  # delay per line
-    for line in wish.strip('\n').split('\n'):
-        print(line)
-        time.sleep(0.3)
 
-t1 = threading.Thread(target=task1, name='t1')
-t1.start()
+`;
+
+const button = document.getElementById('surprise-btn');
+const ascii = document.getElementById('ascii-output');
+const music = document.getElementById('bday-music');
+
+function printWithDelay(text, delay = 50) {
+  const lines = text.trim().split('\n');
+  let i = 0;
+  const interval = setInterval(() => {
+    if (i >= lines.length) return clearInterval(interval);
+    ascii.textContent += lines[i++] + '\n';
+  }, delay);
+}
+
+button.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' }); // Fix for not seeing the ASCII
+  button.style.display = 'none';
+  ascii.style.display = 'block';
+
+  music.play().catch(() => console.warn('Music autoplay blocked'));
+
+  printWithDelay(cake, 40);
+  setTimeout(() => printWithDelay(wish, 40), cake.split('\n').length * 40 + 500);
+});
