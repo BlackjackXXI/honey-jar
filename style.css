@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  background-color: #000;
+  color: #0f0;
+  font-family: monospace;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+#ascii-output {
+  font-size: 2.5vw; /* scalable to screen width */
+  white-space: pre;
+  overflow-x: auto;
+  max-width: 100vw;
+  display: block;
+}
+
+#surprise-btn {
+  font-size: 1.2rem;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 12px;
+  margin-top: 30vh;
+  background-color: #ff69b4;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  #ascii-output {
+    font-size: 3vw;
+  }
+
+  #surprise-btn {
+    font-size: 1rem;
+    padding: 12px 20px;
+  }
+}
